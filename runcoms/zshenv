@@ -9,3 +9,11 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# Custom environment variables²
+## elm
+export ELM_HOME="/usr/lib/node_modules/elm/share"
+
+## editor
+export EDITOR="vim"
+
