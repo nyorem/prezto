@@ -11,3 +11,25 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# Aliases
+## git
+alias git="hub"
+alias g="git"
+alias gst="git status"
+alias gco="git checkout"
+alias gc="git commit"
+alias ga="git add"
+alias gpu="git pull"
+alias gp="git push"
+
+## tmux
+alias tatt="tmux attach"
+alias tls="tmux ls"
+alias mx="tmux new-session -As `basename $PWD`"
+
+## misc
+alias ...="cd ../.."
+alias t="$HOME/bin/t.py --task-dir $HOME/tasks --list TODO --delete-if-empty"
+alias tm="$HOME/bin/t.py --task-dir $HOME/tasks --list MOVIES --delete-if-empty"
+
