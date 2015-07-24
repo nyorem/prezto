@@ -16,12 +16,13 @@ fi
 ## git
 alias git="hub"
 alias g="git"
-alias gst="git status"
-alias gco="git checkout"
-alias gc="git commit"
 alias ga="git add"
-alias gpu="git pull"
+alias gc="git commit"
+alias gco="git checkout"
+alias gst="git status"
 alias gp="git push"
+alias gpu="git pull"
+unalias gs
 
 ## tmux
 alias tatt="tmux attach"
@@ -32,4 +33,13 @@ alias mx="tmux new-session -As `basename $PWD`"
 alias ...="cd ../.."
 alias t="$HOME/bin/t.py --task-dir $HOME/tasks --list TODO --delete-if-empty"
 alias tm="$HOME/bin/t.py --task-dir $HOME/tasks --list MOVIES --delete-if-empty"
+alias yb="youtube-dl"
+alias m="make"
+
+# Variables
+## PATH
+export PATH="$HOME/bin:$PATH"
+
+## EDITOR
+export EDITOR="vim"
 

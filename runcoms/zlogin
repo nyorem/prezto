@@ -21,3 +21,7 @@ if (( $+commands[fortune] )); then
     print
   fi
 fi
+
+# Start ssh-agent
+# eval $(ssh-agent) > /dev/null
+
