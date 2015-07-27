@@ -12,6 +12,11 @@ fi
 
 # Customize to your needs...
 
+# Completion
+autoload -U +X bashcompinit && bashcompinit
+## stack
+eval "$(stack --bash-completion-script "$(which stack)")"
+
 # Aliases
 ## git
 alias git="hub"
@@ -39,6 +44,7 @@ alias m="make"
 # Variables
 ## PATH
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.stack/programs/x86_64-linux/ghc-7.8.4/bin:$PATH"
 
 ## EDITOR
 export EDITOR="vim"
