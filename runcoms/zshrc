@@ -39,14 +39,34 @@ alias tls="tmux ls"
 ## stack
 alias sb="stack build"
 
+## todos
+### todotxt
+export TODOTXT_DEFAULT_ACTION="list"
+alias t="todo.sh -d $HOME/.todo.cfg"
+alias ta="t ls +anime"
+alias td="t ls +dev"
+alias tm="t ls +movie"
+complete -F _todo t
+
+### sjl's t
+# alias t="$HOME/bin/t.py --task-dir $HOME/todo --list DEV --delete-if-empty"
+# alias ta="$HOME/bin/t.py --task-dir $HOME/todo --list ANIMES --delete-if-empty"
+# alias tm="$HOME/bin/t.py --task-dir $HOME/todo --list MOVIES --delete-if-empty"
+
 ## misc
 alias ...="cd ../.."
-alias t="$HOME/bin/t.py --task-dir $HOME/tasks --list TODO --delete-if-empty"
-alias tm="$HOME/bin/t.py --task-dir $HOME/tasks --list MOVIES --delete-if-empty"
+alias gldocs="firefox $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html"
+
 alias yb="youtube-dl"
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
 alias whofap="git ls-tree --name-only -z -r HEAD | grep -z -Z -E '\.(c|h|cpp|hpp|tpp|glsl|hs)$'|xargs -0 -n1 git blame --line-porcelain | grep '^author '| sort | uniq -c | sort -nr"
+alias open="xdg-open"
+alias del="gvfs-trash"
+
+alias fucking="sudo"
+table="(╯°□°）╯︵ ┻━┻"
+lenny="( ͡° ͜ʖ ͡°)"
 
 # Variables
 ## PATH
@@ -65,6 +85,9 @@ export PATH="$CGAL_DIR/Scripts/scripts:$PATH"
 ## nesdev
 export NESDEV_ROOT="$HOME/dev/c/nes"
 export PATH="$NESDEV_ROOT/bin:$PATH"
+
+## lua
+export PATH="$HOME/.luarocks/bin:$PATH"
 
 # Custom functions
 ## Toggle proxy
@@ -110,6 +133,10 @@ function proxy_off(){
     unset https_proxy
     unset ftp_proxy
     unset rsync_proxy
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset FTP_PROXY
+    unset RSYNC_PROXY
     echo -e "Proxy environment variable removed."
 }
 
