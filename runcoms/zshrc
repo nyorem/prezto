@@ -27,9 +27,36 @@ alias gco="git checkout"
 alias gst="git status"
 alias gp="git push"
 alias gpu="git pull"
-unalias gs
+unalias gs # ghostscript
 function gcd () {
     cd $(git rev-parse --show-toplevel)
+}
+function gi () {
+    # Destination
+    root="$(pwd)"
+    dst="$root/.gitignore"
+
+    if [ ! -e "$dst" ]; then
+        touch "$dst"
+    fi
+
+    ignores="$HOME/repos/misc/gitignore"
+    for i in $*; do
+        # Capitalize
+        i=`sed 's/\(.\)/\U\1/' <<< "$i"`
+        src1="$ignores/$i.gitignore"
+        src2="$ignores/Global/$i.gitignore"
+        if [ -e "$src1" ]; then
+            echo "# $i" >> "$dst"
+            cat "$src1" >> "$dst"
+            echo >> "$dst"
+        fi
+        if [ -e "$src2" ]; then
+            echo "# $i" >> "$dst"
+            cat "$src2" >> "$dst"
+            echo >> "$dst"
+        fi
+    done
 }
 
 ## tmux
@@ -55,18 +82,19 @@ complete -F _todo t
 
 ## misc
 alias ...="cd ../.."
-alias gldocs="firefox $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html"
-
+alias gldocs="firefox $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
+alias sfmldoc="firefox /usr/share/SFML/doc/html/index.html &"
+alias jp="cd $HOME/lang/jp"
+alias genki="cd $HOME/lang/jp/books/genki/Genki\ I"
+alias play-dvd="smplayer dvdread://"
 alias yb="youtube-dl"
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
 alias whofap="git ls-tree --name-only -z -r HEAD | grep -z -Z -E '\.(c|h|cpp|hpp|tpp|glsl|hs)$'|xargs -0 -n1 git blame --line-porcelain | grep '^author '| sort | uniq -c | sort -nr"
 alias open="xdg-open"
 alias del="gvfs-trash"
-
 alias fucking="sudo"
-table="(╯°□°）╯︵ ┻━┻"
-lenny="( ͡° ͜ʖ ͡°)"
+alias webcam="mpv tv:// -tv driver=v4l2:device=/dev/video0" # s to take a screenshot
 
 # Variables
 ## PATH
@@ -74,17 +102,40 @@ export PATH="$HOME/bin:$PATH"
 
 ### stack
 export PATH="$HOME/.local/bin:$PATH"
-# export PATH="$HOME/.stack/programs/x86_64-linux/ghc-7.10.2/bin:$PATH"
-export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.0.20151001_ghc-7.10.2/bin:$PATH"
+# export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.0.20151001_ghc-7.10.2/bin:$PATH"
 
 ## CGAL
-export CGAL_DIR="$HOME/projets/cgal/master"
-export PATH="$CGAL_DIR/Scripts/developer_scripts:$PATH"
-export PATH="$CGAL_DIR/Scripts/scripts:$PATH"
+### dev
+# export CGAL_DIR="$HOME/projets/cgal/master"
+# export PATH="$CGAL_DIR/Scripts/developer_scripts:$PATH"
+# export PATH="$CGAL_DIR/Scripts/scripts:$PATH"
+# export LD_LIBRARY_PATH="$CGAL_DIR/lib:$LD_LIBRARY_PATH"
+### release
+export CGAL_DIR="$HOME/projets/cgal/CGAL-4.9"
+export PATH="$CGAL_DIR/scripts:$PATH"
+export LD_LIBRARY_PATH="$CGAL_DIR/lib:$LD_LIBRARY_PATH"
 
-## nesdev
+## nes
 export NESDEV_ROOT="$HOME/dev/c/nes"
 export PATH="$NESDEV_ROOT/bin:$PATH"
+
+## vita
+# export PSVITAIP="192.168.0.27"
+export PSVITAIP="192.168.1.30"
+export VITASDK="$HOME/dev/c/vita/tools/vitasdk"
+export PATH="$VITASDK/bin:$PATH"
+export PSP2CGC=$HOME/dev/c/vita/tools/psp2cgc.exe
+
+function vitasend () {
+	curl -T $1 "ftp://$PSVITAIP:1337/ux0:/"
+}
+
+## misc
+export table="(╯°□°）╯︵ ┻━┻"
+export lenny="( ͡° ͜ʖ ͡°)"
+export startmenu="/usr/share/applications"
+export PHDDIR="$HOME/projets/phd"
+export PATH="$PHDDIR/rendering/lux-v1.6RC1-x86_64-sse2/:$PATH"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
@@ -140,9 +191,20 @@ function proxy_off(){
     echo -e "Proxy environment variable removed."
 }
 
+# Private
 ## Proxy variables (only if the Ethernet cable is plugged in)
 ifup=$(ip link show enp5s0f1 up | grep " UP ")
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/credentials/proxy.sh" ]] && [[ -n "$ifup" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zprezto/credentials/proxy.sh"
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh" ]] && [[ -n "$ifup" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh"
+fi
+
+## Aliases
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/aliases.sh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/private/aliases.sh"
+fi
+
+## network
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/network.sh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/private/network.sh"
 fi
 
