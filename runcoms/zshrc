@@ -66,6 +66,10 @@ alias tls="tmux ls"
 ## stack
 alias sb="stack build"
 
+## cmake
+alias rmake="cmake -DCMAKE_BUILD_TYPE=Release"
+alias dmake="cmake -DCMAKE_BUILD_TYPE=Debug"
+
 ## todos
 ### todotxt
 export TODOTXT_DEFAULT_ACTION="list"
@@ -87,7 +91,8 @@ alias sfmldoc="firefox /usr/share/SFML/doc/html/index.html &"
 alias jp="cd $HOME/lang/jp"
 alias genki="cd $HOME/lang/jp/books/genki/Genki\ I"
 alias play-dvd="smplayer dvdread://"
-alias yb="youtube-dl"
+alias yb="youtube-dl -f 18"
+alias yb-wl='yb "https://www.youtube.com/playlist?list=WL" --username "jmeyron@gmail.com"'
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
 alias whofap="git ls-tree --name-only -z -r HEAD | grep -z -Z -E '\.(c|h|cpp|hpp|tpp|glsl|hs)$'|xargs -0 -n1 git blame --line-porcelain | grep '^author '| sort | uniq -c | sort -nr"
@@ -134,8 +139,16 @@ function vitasend () {
 export table="(╯°□°）╯︵ ┻━┻"
 export lenny="( ͡° ͜ʖ ͡°)"
 export startmenu="/usr/share/applications"
+alias moe="mpv --no-resume-playback http://listen.moe:9999/stream"
+alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
+
+## phd
 export PHDDIR="$HOME/projets/phd"
-export PATH="$PHDDIR/rendering/lux-v1.6RC1-x86_64-sse2/:$PATH"
+# export PATH="$PHDDIR/rendering/lux-v1.6RC1-x86_64-sse2/:$PATH"
+export PATH="$PHDDIR/rendering/lux-v1.6-x86_64-sse2-OpenCL/:$PATH"
+export PATH="$PHDDIR/rendering/blender-2.77a-linux-glibc211-x86_64/:$PATH"
+alias lux="luxrender --debug --threads 4"
+alias blend="optirun blender"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
@@ -193,10 +206,10 @@ function proxy_off(){
 
 # Private
 ## Proxy variables (only if the Ethernet cable is plugged in)
-ifup=$(ip link show enp5s0f1 up | grep " UP ")
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh" ]] && [[ -n "$ifup" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh"
-fi
+# ifup=$(ip link show enp5s0f1 up | grep " UP ")
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh" ]] && [[ -n "$ifup" ]]; then
+#     source "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh"
+# fi
 
 ## Aliases
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/aliases.sh" ]]; then

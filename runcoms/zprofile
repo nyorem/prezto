@@ -72,3 +72,12 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+#
+# Misc
+#
+
+# GTK warnings
+# see: http://unix.stackexchange.com/questions/230238/starting-x-applications-from-the-terminal-and-the-warnings-that-follow
+export NO_AT_BRIDGE=1
+
