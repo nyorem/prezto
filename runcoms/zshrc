@@ -15,7 +15,7 @@ fi
 # Completion
 autoload -U +X bashcompinit && bashcompinit
 ## stack
-eval "$(stack --bash-completion-script "$(which stack)")"
+eval "$(stack --bash-completion-script stack)"
 
 # Aliases
 ## git
@@ -70,8 +70,7 @@ alias sb="stack build"
 alias rmake="cmake -DCMAKE_BUILD_TYPE=Release"
 alias dmake="cmake -DCMAKE_BUILD_TYPE=Debug"
 
-## todos
-### todotxt
+## todotxt
 export TODOTXT_DEFAULT_ACTION="list"
 alias t="todo.sh -d $HOME/.todo.cfg"
 alias ta="t ls +anime"
@@ -79,27 +78,34 @@ alias td="t ls +dev"
 alias tm="t ls +movie"
 complete -F _todo t
 
-### sjl's t
+## sjl's t
 # alias t="$HOME/bin/t.py --task-dir $HOME/todo --list DEV --delete-if-empty"
 # alias ta="$HOME/bin/t.py --task-dir $HOME/todo --list ANIMES --delete-if-empty"
 # alias tm="$HOME/bin/t.py --task-dir $HOME/todo --list MOVIES --delete-if-empty"
+#
+## mpv
+alias play-dvd="smplayer dvdread://"
+alias webcam="mpv tv://" # s to take a screenshot
+alias mpvr="mpv --no-resume-playback --no-audio-display"
+alias moe="mpv --no-resume-playback http://listen.moe:9999/stream"
+alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## misc
 alias ...="cd ../.."
 alias gldocs="firefox $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
 alias sfmldoc="firefox /usr/share/SFML/doc/html/index.html &"
 alias jp="cd $HOME/lang/jp"
-alias genki="cd $HOME/lang/jp/books/genki/Genki\ I"
-alias play-dvd="smplayer dvdread://"
+# alias genki="cd $HOME/lang/jp/books/genki/Genki\ I"
 alias yb="youtube-dl -f 18"
 alias yb-wl='yb "https://www.youtube.com/playlist?list=WL" --username "jmeyron@gmail.com"'
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
 alias whofap="git ls-tree --name-only -z -r HEAD | grep -z -Z -E '\.(c|h|cpp|hpp|tpp|glsl|hs)$'|xargs -0 -n1 git blame --line-porcelain | grep '^author '| sort | uniq -c | sort -nr"
 alias open="xdg-open"
-alias del="gvfs-trash"
+alias del="gio trash"
 alias fucking="sudo"
-alias webcam="mpv tv:// -tv driver=v4l2:device=/dev/video0" # s to take a screenshot
+alias trackmania="cd $HOME/.wine/drive_c/Program\ Files\ \(x86\)/TmNationsForever && optirun wine TmForeverLauncher.exe"
+alias ipython="python -i"
 
 # Variables
 ## PATH
@@ -107,7 +113,7 @@ export PATH="$HOME/bin:$PATH"
 
 ### stack
 export PATH="$HOME/.local/bin:$PATH"
-# export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.0.20151001_ghc-7.10.2/bin:$PATH"
+export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin:$PATH"
 
 ## CGAL
 ### dev
@@ -139,8 +145,6 @@ function vitasend () {
 export table="(╯°□°）╯︵ ┻━┻"
 export lenny="( ͡° ͜ʖ ͡°)"
 export startmenu="/usr/share/applications"
-alias moe="mpv --no-resume-playback http://listen.moe:9999/stream"
-alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## phd
 export PHDDIR="$HOME/projets/phd"
@@ -149,6 +153,8 @@ export PATH="$PHDDIR/rendering/lux-v1.6-x86_64-sse2-OpenCL/:$PATH"
 export PATH="$PHDDIR/rendering/blender-2.77a-linux-glibc211-x86_64/:$PATH"
 alias lux="luxrender --debug --threads 4"
 alias blend="optirun blender"
+alias _blender="$HOME/bin/blender.sh"
+alias meshlab="LC_ALL=C meshlab" # see meshlab bug: https://sourceforge.net/p/meshlab/bugs/162/
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
@@ -202,6 +208,47 @@ function proxy_off(){
     unset FTP_PROXY
     unset RSYNC_PROXY
     echo -e "Proxy environment variable removed."
+}
+
+## Image manipulation utilities
+function greyscale () {
+    img="$1"
+    filename="${img%.*}"
+    extension="${img##*.}"
+    img_bw=$filename"_bw.$extension"
+    tmp="out.$extension"
+    convert "$img" -set colorspace Gray -separate -average "$tmp"
+    mv "$tmp" "$img_bw"
+}
+
+function flip-x () {
+    img="$1"
+    filename="${img%.*}"
+    extension="${img##*.}"
+    img_flip=$filename"_flip-x.$extension"
+    tmp="out.$extension"
+    convert "$img" -flop "$tmp"
+    mv "$tmp" "$img_flip"
+}
+
+function flip-y () {
+    img="$1"
+    filename="${img%.*}"
+    extension="${img##*.}"
+    img_flip=$filename"_flip-y.$extension"
+    tmp="out.$extension"
+    convert "$img" -flip "$tmp"
+    mv "$tmp" "$img_flip"
+}
+
+function convert-all () {
+    in_ext="$1"
+    out_ext="$2"
+    for file in $(ls *.${in_ext}); do
+        filename="${file%.*}"
+        out_filename="$filename.$out_ext"
+        convert "$file" "$out_filename"
+    done
 }
 
 # Private
