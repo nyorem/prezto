@@ -11,6 +11,4 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
 fi
 
 # Custom environment variables
-## elm
-export ELM_HOME="/usr/lib/node_modules/elm/share"
 

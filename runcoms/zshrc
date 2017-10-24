@@ -14,6 +14,8 @@ fi
 
 # Completion
 autoload -U +X bashcompinit && bashcompinit
+# https://wiki.archlinux.org/index.php/zsh#Persistent_rehash
+zstyle ':completion:*' rehash true
 ## stack
 eval "$(stack --bash-completion-script stack)"
 
@@ -66,17 +68,22 @@ alias tls="tmux ls"
 ## stack
 alias sb="stack build"
 
+## cargo
+alias cb="cargo build"
+alias cr="cargo run"
+alias ct="cargo test"
+
 ## cmake
 alias rmake="cmake -DCMAKE_BUILD_TYPE=Release"
 alias dmake="cmake -DCMAKE_BUILD_TYPE=Debug"
 
 ## todotxt
-export TODOTXT_DEFAULT_ACTION="list"
-alias t="todo.sh -d $HOME/.todo.cfg"
-alias ta="t ls +anime"
-alias td="t ls +dev"
-alias tm="t ls +movie"
-complete -F _todo t
+# export TODOTXT_DEFAULT_ACTION="list"
+# alias t="todo.sh -d $HOME/.todo.cfg"
+# alias ta="t ls +anime"
+# alias td="t ls +dev"
+# alias tm="t ls +movie"
+# complete -F _todo t
 
 ## sjl's t
 # alias t="$HOME/bin/t.py --task-dir $HOME/todo --list DEV --delete-if-empty"
@@ -92,12 +99,11 @@ alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## misc
 alias ...="cd ../.."
-alias gldocs="firefox $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
-alias sfmldoc="firefox /usr/share/SFML/doc/html/index.html &"
+alias gldocs="xdg-open $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
+alias sfmldoc="xdg-open /usr/share/SFML/doc/html/index.html &"
 alias jp="cd $HOME/lang/jp"
 # alias genki="cd $HOME/lang/jp/books/genki/Genki\ I"
-alias yb="youtube-dl -f 18"
-alias yb-wl='yb "https://www.youtube.com/playlist?list=WL" --username "jmeyron@gmail.com"'
+alias yb="youtube-dl -f 18 --no-playlist"
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
 alias whofap="git ls-tree --name-only -z -r HEAD | grep -z -Z -E '\.(c|h|cpp|hpp|tpp|glsl|hs)$'|xargs -0 -n1 git blame --line-porcelain | grep '^author '| sort | uniq -c | sort -nr"
@@ -114,6 +120,9 @@ export PATH="$HOME/bin:$PATH"
 ### stack
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin:$PATH"
+
+### rust
+export PATH="$HOME/.cargo/bin:$PATH"
 
 ## CGAL
 ### dev
@@ -148,6 +157,7 @@ export startmenu="/usr/share/applications"
 
 ## phd
 export PHDDIR="$HOME/projets/phd"
+export LUXROOT_DIR="$PHDDIR/rendering/lux-v1.6-x86_64-sse2-OpenCL/"
 # export PATH="$PHDDIR/rendering/lux-v1.6RC1-x86_64-sse2/:$PATH"
 export PATH="$PHDDIR/rendering/lux-v1.6-x86_64-sse2-OpenCL/:$PATH"
 export PATH="$PHDDIR/rendering/blender-2.77a-linux-glibc211-x86_64/:$PATH"
@@ -268,3 +278,16 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/network.sh" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprezto/private/network.sh"
 fi
 
+## fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# fzf + ag / rg configuration
+if type fzf > /dev/null; then
+    if type rg > /dev/null; then
+        export FZF_DEFAULT_COMMAND='rg --files' # rg
+    elif type ag > /dev/null; then
+        export FZF_DEFAULT_COMMAND='ag --nocolor -g ""' # ag
+    fi
+
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
