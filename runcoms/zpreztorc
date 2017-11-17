@@ -33,6 +33,7 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'ssh' \
   'completion' \
+  'pacman' \
   'git' \
   'syntax-highlighting' \
   'history-substring-search' \
@@ -106,7 +107,8 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 #
 
 # Set the Pacman frontend.
-zstyle ':prezto:module:pacman' frontend 'yaourt'
+# zstyle ':prezto:module:pacman' frontend 'yaourt'
+zstyle ':prezto:module:pacman' frontend 'pacaur'
 
 #
 # Prompt

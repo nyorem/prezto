@@ -27,4 +27,3 @@ stty -ixon
 
 # rupa/z
 . /usr/lib/z.sh
-

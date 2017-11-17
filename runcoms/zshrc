@@ -89,20 +89,19 @@ alias dmake="cmake -DCMAKE_BUILD_TYPE=Debug"
 # alias t="$HOME/bin/t.py --task-dir $HOME/todo --list DEV --delete-if-empty"
 # alias ta="$HOME/bin/t.py --task-dir $HOME/todo --list ANIMES --delete-if-empty"
 # alias tm="$HOME/bin/t.py --task-dir $HOME/todo --list MOVIES --delete-if-empty"
-#
+
 ## mpv
 alias play-dvd="smplayer dvdread://"
-alias webcam="mpv tv://" # s to take a screenshot
+alias webcam=" mpv /dev/video0 --fps=30 --no-resume-playback" # s to take a screenshot
 alias mpvr="mpv --no-resume-playback --no-audio-display"
-alias moe="mpv --no-resume-playback http://listen.moe:9999/stream"
+alias moe="mpv --no-resume-playback http://listen.moe/vorbis"
 alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## misc
 alias ...="cd ../.."
-alias gldocs="xdg-open $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
+alias gldoc="xdg-open $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
 alias sfmldoc="xdg-open /usr/share/SFML/doc/html/index.html &"
 alias jp="cd $HOME/lang/jp"
-# alias genki="cd $HOME/lang/jp/books/genki/Genki\ I"
 alias yb="youtube-dl -f 18 --no-playlist"
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
@@ -111,15 +110,20 @@ alias open="xdg-open"
 alias del="gio trash"
 alias fucking="sudo"
 alias trackmania="cd $HOME/.wine/drive_c/Program\ Files\ \(x86\)/TmNationsForever && optirun wine TmForeverLauncher.exe"
-alias ipython="python -i"
+
+# Raspberry
+export PIIP="192.168.1.16"
+alias pi="ssh pi@$PIIP"
+alias pix="ssh -Y pi@$PIIP"
 
 # Variables
 ## PATH
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin/perso:$PATH"
 
 ### stack
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin:$PATH"
+# export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin:$PATH"
 
 ### rust
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -145,7 +149,6 @@ export PSVITAIP="192.168.1.30"
 export VITASDK="$HOME/dev/c/vita/tools/vitasdk"
 export PATH="$VITASDK/bin:$PATH"
 export PSP2CGC=$HOME/dev/c/vita/tools/psp2cgc.exe
-
 function vitasend () {
 	curl -T $1 "ftp://$PSVITAIP:1337/ux0:/"
 }
@@ -159,12 +162,15 @@ export startmenu="/usr/share/applications"
 export PHDDIR="$HOME/projets/phd"
 export LUXROOT_DIR="$PHDDIR/rendering/lux-v1.6-x86_64-sse2-OpenCL/"
 # export PATH="$PHDDIR/rendering/lux-v1.6RC1-x86_64-sse2/:$PATH"
-export PATH="$PHDDIR/rendering/lux-v1.6-x86_64-sse2-OpenCL/:$PATH"
+export PATH="$LUXROOT_DIR:$PATH"
 export PATH="$PHDDIR/rendering/blender-2.77a-linux-glibc211-x86_64/:$PATH"
 alias lux="luxrender --debug --threads 4"
 alias blend="optirun blender"
 alias _blender="$HOME/bin/blender.sh"
 alias meshlab="LC_ALL=C meshlab" # see meshlab bug: https://sourceforge.net/p/meshlab/bugs/162/
+
+## arch
+export AURHELPER="pacaur"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
