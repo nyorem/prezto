@@ -17,7 +17,7 @@ autoload -U +X bashcompinit && bashcompinit
 # https://wiki.archlinux.org/index.php/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 ## stack
-eval "$(stack --bash-completion-script stack)"
+# eval "$(stack --bash-completion-script stack)"
 
 # Aliases
 ## git
@@ -98,11 +98,13 @@ alias moe="mpv --no-resume-playback http://listen.moe/vorbis"
 alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## misc
+alias py="python -i"
 alias ...="cd ../.."
 alias gldoc="xdg-open $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
 alias sfmldoc="xdg-open /usr/share/SFML/doc/html/index.html &"
 alias jp="cd $HOME/lang/jp"
 alias yb="youtube-dl -f 18 --no-playlist"
+alias hyb="youtube-dl -f 22 --no-playlist"
 alias m="make"
 alias vim-update="vim +PlugUpgrade +PlugUpdate"
 alias whofap="git ls-tree --name-only -z -r HEAD | grep -z -Z -E '\.(c|h|cpp|hpp|tpp|glsl|hs)$'|xargs -0 -n1 git blame --line-porcelain | grep '^author '| sort | uniq -c | sort -nr"
@@ -113,8 +115,13 @@ alias trackmania="cd $HOME/.wine/drive_c/Program\ Files\ \(x86\)/TmNationsForeve
 
 # Raspberry
 export PIIP="192.168.1.16"
-alias pi="ssh pi@$PIIP"
-alias pix="ssh -Y pi@$PIIP"
+export PIDOMAIN="nyorem.ddns.net"
+## Local
+alias lpi="ssh pi@$PIIP"
+alias lpix="ssh -Y pi@$PIIP"
+## Global
+alias pi="ssh pi@$PIDOMAIN"
+alias pix="ssh -Y pi@$PIDOMAIN"
 
 # Variables
 ## PATH
@@ -144,11 +151,11 @@ export NESDEV_ROOT="$HOME/dev/c/nes"
 export PATH="$NESDEV_ROOT/bin:$PATH"
 
 ## vita
-# export PSVITAIP="192.168.0.27"
 export PSVITAIP="192.168.1.30"
 export VITASDK="$HOME/dev/c/vita/tools/vitasdk"
 export PATH="$VITASDK/bin:$PATH"
 export PSP2CGC=$HOME/dev/c/vita/tools/psp2cgc.exe
+alias psp2cgc="wine $PSP2CGC"
 function vitasend () {
 	curl -T $1 "ftp://$PSVITAIP:1337/ux0:/"
 }
@@ -157,6 +164,7 @@ function vitasend () {
 export table="(╯°□°）╯︵ ┻━┻"
 export lenny="( ͡° ͜ʖ ͡°)"
 export startmenu="/usr/share/applications"
+export BROWSER="chromium"
 
 ## phd
 export PHDDIR="$HOME/projets/phd"
@@ -170,7 +178,7 @@ alias _blender="$HOME/bin/blender.sh"
 alias meshlab="LC_ALL=C meshlab" # see meshlab bug: https://sourceforge.net/p/meshlab/bugs/162/
 
 ## arch
-export AURHELPER="pacaur"
+export AURHELPER="trizen"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
