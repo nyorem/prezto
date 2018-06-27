@@ -136,6 +136,9 @@ export PATH="$HOME/.local/bin:$PATH"
 ### rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
+### android
+alias studio="$HOME/android-studio/bin/studio.sh"
+
 ## CGAL
 ### dev
 # export CGAL_DIR="$HOME/projets/cgal/master"
@@ -277,6 +280,19 @@ function convert-all () {
         out_filename="$filename.$out_ext"
         convert "$file" "$out_filename"
     done
+}
+
+## Convert to Markdown
+function md () {
+    if [ $# -ne 1 ]; then
+        echo "Usage: md input.[md, markdown]"
+        return 1
+    fi
+
+    filename="$1"
+    output="${filename%.*}.html"
+
+    pandoc -i "$filename" -s -o "$output"
 }
 
 # Private
