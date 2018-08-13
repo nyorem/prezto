@@ -14,7 +14,7 @@ fi
 
 # Completion
 autoload -U +X bashcompinit && bashcompinit
-## trizen: copy /usr/share/zsh/site-functions/_trizen to modules/completion/external/src
+## aurhelper: copy /usr/share/zsh/site-functions/_aurhelper to modules/completion/external/src
 # https://wiki.archlinux.org/index.php/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 ## stack
@@ -185,7 +185,7 @@ alias blend2="optirun $PHDDIR/rendering/blender-2.79b-linux-glibc219-x86_64/blen
 alias meshlab="LC_ALL=C meshlab" # see meshlab bug: https://sourceforge.net/p/meshlab/bugs/162/
 
 ## arch
-export AURHELPER="trizen"
+export AURHELPER="yay"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
@@ -301,11 +301,6 @@ function md () {
 # if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh" ]] && [[ -n "$ifup" ]]; then
 #     source "${ZDOTDIR:-$HOME}/.zprezto/private/proxy.sh"
 # fi
-
-## Aliases
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/aliases.sh" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zprezto/private/aliases.sh"
-fi
 
 ## network
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/private/network.sh" ]]; then
