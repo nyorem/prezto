@@ -70,26 +70,13 @@ alias tls="tmux ls"
 # alias sb="stack build"
 
 ## cargo
-alias cb="cargo build"
-alias cr="cargo run"
-alias ct="cargo test"
+# alias cb="cargo build"
+# alias cr="cargo run"
+# alias ct="cargo test"
 
 ## cmake
 alias rmake="cmake -DCMAKE_BUILD_TYPE=Release"
 alias dmake="cmake -DCMAKE_BUILD_TYPE=Debug"
-
-## todotxt
-# export TODOTXT_DEFAULT_ACTION="list"
-# alias t="todo.sh -d $HOME/.todo.cfg"
-# alias ta="t ls +anime"
-# alias td="t ls +dev"
-# alias tm="t ls +movie"
-# complete -F _todo t
-
-## sjl's t
-# alias t="$HOME/bin/t.py --task-dir $HOME/todo --list DEV --delete-if-empty"
-# alias ta="$HOME/bin/t.py --task-dir $HOME/todo --list ANIMES --delete-if-empty"
-# alias tm="$HOME/bin/t.py --task-dir $HOME/todo --list MOVIES --delete-if-empty"
 
 ## mpv
 alias play-dvd="smplayer dvdread://"
@@ -134,10 +121,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin:$PATH"
 
 ### rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
-### android
-alias studio="$HOME/android-studio/bin/studio.sh"
+# export PATH="$HOME/.cargo/bin:$PATH"
 
 ## CGAL
 ### dev
