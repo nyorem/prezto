@@ -34,33 +34,33 @@ unalias gs # ghostscript
 function gcd () {
     cd $(git rev-parse --show-toplevel)
 }
-function gi () {
-    # Destination
-    root="$(pwd)"
-    dst="$root/.gitignore"
+# function gi () {
+#     # Destination
+#     root="$(pwd)"
+#     dst="$root/.gitignore"
 
-    if [ ! -e "$dst" ]; then
-        touch "$dst"
-    fi
+#     if [ ! -e "$dst" ]; then
+#         touch "$dst"
+#     fi
 
-    ignores="$HOME/repos/misc/gitignore"
-    for i in $*; do
-        # Capitalize
-        i=`sed 's/\(.\)/\U\1/' <<< "$i"`
-        src1="$ignores/$i.gitignore"
-        src2="$ignores/Global/$i.gitignore"
-        if [ -e "$src1" ]; then
-            echo "# $i" >> "$dst"
-            cat "$src1" >> "$dst"
-            echo >> "$dst"
-        fi
-        if [ -e "$src2" ]; then
-            echo "# $i" >> "$dst"
-            cat "$src2" >> "$dst"
-            echo >> "$dst"
-        fi
-    done
-}
+#     ignores="$HOME/repos/misc/gitignore"
+#     for i in $*; do
+#         # Capitalize
+#         i=`sed 's/\(.\)/\U\1/' <<< "$i"`
+#         src1="$ignores/$i.gitignore"
+#         src2="$ignores/Global/$i.gitignore"
+#         if [ -e "$src1" ]; then
+#             echo "# $i" >> "$dst"
+#             cat "$src1" >> "$dst"
+#             echo >> "$dst"
+#         fi
+#         if [ -e "$src2" ]; then
+#             echo "# $i" >> "$dst"
+#             cat "$src2" >> "$dst"
+#             echo >> "$dst"
+#         fi
+#     done
+# }
 
 ## tmux
 alias tatt="tmux attach -t"
@@ -100,16 +100,15 @@ alias open="xdg-open"
 alias del="gio trash"
 alias fucking="sudo"
 alias trackmania="cd $HOME/.wine/drive_c/Program\ Files\ \(x86\)/TmNationsForever && optirun wine TmForeverLauncher.exe"
+alias off=" wine $HOME/.wine/drive_c/Program\ Files\ \(x86\)/Unproductive\ Fun\ Time/OFF/RPG_RT.exe"
+alias nvidia="optirun nvidia-settings -c :8"
+alias s="sudo apt-get"
 
 # Raspberry
 export PIIP="192.168.1.16"
-export PIDOMAIN="nyorem.ddns.net"
 ## Local
-alias lpi="ssh pi@$PIIP"
-alias lpix="ssh -Y pi@$PIIP"
-## Global
-alias pi="ssh pi@$PIDOMAIN"
-alias pix="ssh -Y pi@$PIDOMAIN"
+alias pi="ssh pi@$PIIP"
+alias pix="ssh -Y pi@$PIIP"
 
 # Variables
 ## PATH
@@ -124,19 +123,13 @@ export PATH="$HOME/.local/bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
 
 ## CGAL
-### dev
-# export CGAL_DIR="$HOME/projets/cgal/master"
-# export PATH="$CGAL_DIR/Scripts/developer_scripts:$PATH"
-# export PATH="$CGAL_DIR/Scripts/scripts:$PATH"
-# export LD_LIBRARY_PATH="$CGAL_DIR/lib:$LD_LIBRARY_PATH"
-### release
-export CGAL_DIR="$HOME/projets/cgal/CGAL-4.12"
+export CGAL_DIR="$HOME/projets/cgal/CGAL-4.13"
 export PATH="$CGAL_DIR/scripts:$PATH"
 export LD_LIBRARY_PATH="$CGAL_DIR/lib:$LD_LIBRARY_PATH"
 
 ## nes
-export NESDEV_ROOT="$HOME/dev/c/nes"
-export PATH="$NESDEV_ROOT/bin:$PATH"
+# export NESDEV_ROOT="$HOME/dev/c/nes"
+# export PATH="$NESDEV_ROOT/bin:$PATH"
 
 ## vita
 export PSVITAIP="192.168.1.30"
@@ -153,7 +146,7 @@ function vitasend () {
 export table="(╯°□°）╯︵ ┻━┻"
 export lenny="( ͡° ͜ʖ ͡°)"
 export startmenu="/usr/share/applications"
-export BROWSER="chromium"
+export BROWSER="firefox"
 
 ## phd
 export PHDDIR="$HOME/projets/phd"
@@ -168,11 +161,21 @@ alias _blender="$HOME/bin/blender.sh"
 alias blend2="optirun $PHDDIR/rendering/blender-2.79b-linux-glibc219-x86_64/blender" # blender 2.79 (with LuxCoreBlender)
 alias meshlab="LC_ALL=C meshlab" # see meshlab bug: https://sourceforge.net/p/meshlab/bugs/162/
 
+## postdoc
+alias liris="ssh -t jmeyron@connect.liris.cnrs.fr bash"
+
 ## arch
 export AURHELPER="yay"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
+
+## SHIFT_JIS -> UTF-8
+function utf8() {
+    for x in *.txt; do
+        iconv --verbose -f SHIFT_JIS -t UTF-8 $x -o utf8/${x};
+    done
+}
 
 # Custom functions
 ## Toggle proxy
