@@ -34,34 +34,6 @@ unalias gs # ghostscript
 function gcd () {
     cd $(git rev-parse --show-toplevel)
 }
-# function gi () {
-#     # Destination
-#     root="$(pwd)"
-#     dst="$root/.gitignore"
-
-#     if [ ! -e "$dst" ]; then
-#         touch "$dst"
-#     fi
-
-#     ignores="$HOME/repos/misc/gitignore"
-#     for i in $*; do
-#         # Capitalize
-#         i=`sed 's/\(.\)/\U\1/' <<< "$i"`
-#         src1="$ignores/$i.gitignore"
-#         src2="$ignores/Global/$i.gitignore"
-#         if [ -e "$src1" ]; then
-#             echo "# $i" >> "$dst"
-#             cat "$src1" >> "$dst"
-#             echo >> "$dst"
-#         fi
-#         if [ -e "$src2" ]; then
-#             echo "# $i" >> "$dst"
-#             cat "$src2" >> "$dst"
-#             echo >> "$dst"
-#         fi
-#     done
-# }
-
 ## tmux
 alias tatt="tmux attach -t"
 alias tls="tmux ls"
@@ -86,7 +58,7 @@ alias moe="mpv --no-resume-playback https://listen.moe/stream"
 alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## misc
-alias py="python -i"
+alias py="python3 -i"
 alias ...="cd ../.."
 alias gldoc="xdg-open $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
 alias sfmldoc="xdg-open /usr/share/SFML/doc/html/index.html &"
@@ -103,6 +75,7 @@ alias trackmania="cd $HOME/.wine/drive_c/Program\ Files\ \(x86\)/TmNationsForeve
 alias off=" wine $HOME/.wine/drive_c/Program\ Files\ \(x86\)/Unproductive\ Fun\ Time/OFF/RPG_RT.exe"
 alias nvidia="optirun nvidia-settings -c :8"
 alias s="sudo apt-get"
+alias ss="sudo apt-get -f"
 
 # Raspberry
 export PIIP="192.168.1.16"
@@ -117,7 +90,7 @@ export PATH="$HOME/bin/perso:$PATH"
 
 ### stack
 export PATH="$HOME/.local/bin:$PATH"
-# export PATH="$HOME/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin:$PATH"
+export PATH="$HOME/.stack/programs/x86_64-linux/ghc-8.6.4/bin/:$PATH"
 
 ### rust
 # export PATH="$HOME/.cargo/bin:$PATH"
@@ -163,6 +136,8 @@ alias meshlab="LC_ALL=C meshlab" # see meshlab bug: https://sourceforge.net/p/me
 
 ## postdoc
 alias liris="ssh -t jmeyron@connect.liris.cnrs.fr bash"
+alias dropbox="rclone mount Dropbox: ~/Dropbox/"
+alias vi="vim"
 
 ## arch
 export AURHELPER="yay"
