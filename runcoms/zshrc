@@ -30,7 +30,6 @@ alias gco="git checkout"
 alias gst="git status"
 alias gp="git push"
 alias gpu="git pull"
-unalias gs # ghostscript
 function gcd () {
     cd $(git rev-parse --show-toplevel)
 }
@@ -42,9 +41,9 @@ alias tls="tmux ls"
 # alias sb="stack build"
 
 ## cargo
-# alias cb="cargo build"
-# alias cr="cargo run"
-# alias ct="cargo test"
+alias cb="cargo build"
+alias cr="cargo run"
+alias ct="cargo test"
 
 ## cmake
 alias rmake="cmake -DCMAKE_BUILD_TYPE=Release"
@@ -58,6 +57,7 @@ alias moe="mpv --no-resume-playback https://listen.moe/stream"
 alias drive="mpv --no-resume-playback http://streaming.radionomy.com/DRIVE"
 
 ## misc
+alias python="python3"
 alias py="python3 -i"
 alias ...="cd ../.."
 alias gldoc="xdg-open $HOME/dev/cpp/gl/tools/docs.gl/htdocs/index.html &"
@@ -93,12 +93,17 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.stack/programs/x86_64-linux/ghc-8.6.4/bin/:$PATH"
 
 ### rust
-# export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 ## CGAL
 export CGAL_DIR="$HOME/projets/cgal/CGAL-5.0.2"
 export PATH="$CGAL_DIR/scripts:$PATH"
 export LD_LIBRARY_PATH="$CGAL_DIR/lib:$LD_LIBRARY_PATH"
+
+## DGtal
+export DGtal="$HOME/projets/postdoc/code/DGtal-nyorem/"
+export DGtalScripts="$HOME/projets/postdoc/code/DGtalScripts/"
+export PATH="$DGtalScripts/dev/scripts:$PATH"
 
 ## nes
 # export NESDEV_ROOT="$HOME/dev/c/nes"
@@ -112,8 +117,11 @@ export PATH="$VITASDK/bin:$PATH"
 export PSP2CGC="$HOME/dev/c/vita/tools/psp2cgc.exe"
 alias psp2cgc="wine $PSP2CGC"
 function vitasend () {
-	curl -T $1 "ftp://$PSVITAIP:1337/ux0:/"
+    curl -T $1 "ftp://$PSVITAIP:1337/ux0:/"
 }
+
+## yarn
+export PATH="$HOME/.yarn/bin:$PATH"
 
 ## misc
 export table="(╯°□°）╯︵ ┻━┻"
@@ -144,6 +152,11 @@ export AURHELPER="yay"
 
 ## lua
 export PATH="$HOME/.luarocks/bin:$PATH"
+
+## android
+alias studio="$HOME/android-studio/bin/studio.sh"
+export ANDROID_SDK="$HOME/Android/Sdk"
+export PATH="$ANDROID_SDK/platform-tools:$PATH"
 
 ## SHIFT_JIS -> UTF-8
 function utf8() {

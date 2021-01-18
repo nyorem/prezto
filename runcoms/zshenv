@@ -12,3 +12,4 @@ fi
 
 # Custom environment variables
 
+source "$HOME/.cargo/env"
